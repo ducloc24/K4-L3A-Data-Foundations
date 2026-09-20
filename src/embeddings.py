@@ -48,14 +48,21 @@ class LocalEmbedder:
 
 
 class OpenAIEmbedder:
-    """OpenAI embeddings API-backed embedder."""
+    """OpenAI embeddings API-backed embedder (tương thích proxy như shopaikey)."""
 
     def __init__(self, model_name: str = OPENAI_EMBEDDING_MODEL) -> None:
         from openai import OpenAI
 
+        # Lấy base_url từ env nếu có, không có thì fallback sang URL mặc định của bên shopaikey
+        base_url = os.getenv("OPENAI_BASE_URL", "https://api.shopaikey.com/v1")
+        api_key = os.getenv("OPENAI_API_KEY")
+        
+        if not api_key:
+            raise RuntimeError("Cần cấu hình OPENAI_API_KEY trong biến môi trường!")
+
         self.model_name = model_name
         self._backend_name = model_name
-        self.client = OpenAI()
+        self.client = OpenAI(api_key=api_key, base_url=base_url)
 
     def __call__(self, text: str) -> list[float]:
         response = self.client.embeddings.create(model=self.model_name, input=text)

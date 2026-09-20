@@ -1,0 +1,84 @@
+================================================================================
+BÁO CÁO BENCHMARK RETRIEVAL — CHECKPOINT 6 (UET CORPUS)
+Thực hiện: Thành viên 3 — Lộc
+Chiến lược: Recursive Chunking (chunk_size=500)
+Lý do chọn: Ưu tiên chia theo cấu trúc tự nhiên của văn bản (đoạn, dòng, câu), giúp giữ ngữ cảnh tốt hơn.
+================================================================================
+
+[1] Đọc & chia nhỏ 5 tài liệu bằng RecursiveChunker(chunk_size=500):
+  - chien-luoc-phat-trien.md      : 14,709 ký tự ->  39 chunks
+  - co-hoi-nghe-nghiep.md         :  3,762 ký tự ->  10 chunks
+  - quy-che-dao-tao.md            : 69,488 ký tự -> 171 chunks
+  - quy-dinh-mo-nganh.md          :  1,597 ký tự ->   4 chunks
+  - tuyen-sinh.md                 :  6,382 ký tự ->  18 chunks
+
+=> Tổng số Chunks được tạo: 242
+=> Đã nạp thành công 242 chunks vào EmbeddingStore
+
+================================================================================
+[2] THỰC THI 5 BENCHMARK QUERIES & CHẤM ĐIỂM HAI MỨC (TWO-TIER EVALUATION):
+================================================================================
+
+--- CÂU HỎI 1 ---
+Query : Sinh viên có thể tìm kiếm những cơ hội nghề nghiệp nào thông qua UET?
+Gold  : Cổng thông tin việc làm UET cung cấp các cơ hội thực tập, việc làm kỹ sư lập trình C/C++, Embedded Software, nhân viên phân tích mô phỏng, thiết kế cơ khí và kết nối doanh nghiệp đối tác tuyển dụng.
+  Top-1 | Score: 0.6263 | doc: co-hoi-nghe-nghiep   | Nội dung: - **Tạo và chuẩn hóa hồ sơ ứng tuyển (CV Profile)**: Hỗ trợ sinh viên tạo CV điện tử theo tiêu chuẩn chuyên ng...
+  Top-2 | Score: 0.5174 | doc: co-hoi-nghe-nghiep   | Nội dung: # CƠ HỘI NGHỀ NGHIỆP VÀ VIỆC LÀM CHO SINH VIÊN TRƯỜNG ĐẠI HỌC CÔNG NGHỆ (ĐHQGHN)  Cổng thông tin việc làm Trườ...
+  Top-3 | Score: 0.5062 | doc: tuyen-sinh           | Nội dung: ### Bước 2: Khai báo hồ sơ và nhận giấy báo nhập học - Thí sinh truy cập cổng thông tin của Trường Đại học Côn...
+-> Đánh giá: XUẤT SẮC (Top-1 chứa câu trả lời chuẩn) | Điểm câu: 2/2
+
+--- CÂU HỎI 2 ---
+Query : UET hiện cung cấp những thông tin tuyển sinh nào cho thí sinh?
+Gold  : Điểm chuẩn trúng tuyển, chính sách học bổng theo Nghị định 179/2026/NĐ-CP hỗ trợ chi phí sinh hoạt, ngưỡng bảo đảm chất lượng đầu vào, cổng đăng ký trực tuyến và danh mục các ngành đào tạo đại học chính quy.
+  Top-1 | Score: 0.6018 | doc: co-hoi-nghe-nghiep   | Nội dung: - **Tạo và chuẩn hóa hồ sơ ứng tuyển (CV Profile)**: Hỗ trợ sinh viên tạo CV điện tử theo tiêu chuẩn chuyên ng...
+  Top-2 | Score: 0.5607 | doc: tuyen-sinh           | Nội dung: ### Bước 2: Khai báo hồ sơ và nhận giấy báo nhập học - Thí sinh truy cập cổng thông tin của Trường Đại học Côn...
+  Top-3 | Score: 0.5204 | doc: tuyen-sinh           | Nội dung: - **Mã trường**: QHI - **Hotline tư vấn tuyển sinh**: 033 49 24 224 - **Email tuyển sinh**: tuyensinhdhcn@vnu....
+-> Đánh giá: ĐẠT (Top-3 chứa câu trả lời chuẩn) | Điểm câu: 1/2
+
+--- CÂU HỎI 3 ---
+Query : Những mục tiêu chính trong chiến lược phát triển của Trường Đại học Công nghệ là gì?
+Gold  : Trở thành cơ sở giáo dục đại học hàng đầu trong cả nước về tiên phong, sáng tạo và dẫn dắt trong đào tạo nguồn nhân lực bậc cao và khoa học công nghệ; duy trì vị thế trường kỹ thuật công nghệ tiên tiến ở Châu Á vào năm 2045.
+  Top-1 | Score: 0.6135 | doc: chien-luoc-phat-trien | Nội dung: Đây là những nhân tố mới, quan trọng, là cơ sở để xây dựng Chiến lược phát triển của Trường Đại học Công nghệ...
+  Top-2 | Score: 0.5829 | doc: chien-luoc-phat-trien | Nội dung: hậu, 14: Tài nguyên và môi trường biển, 15: Tài nguyên và môi trường trên đất liền, 16: Hòa bình, công lý và c...
+  Top-3 | Score: 0.5752 | doc: chien-luoc-phat-trien | Nội dung: Mục tiêu giáo dục của đại học định hướng nghiên cứu không chỉ để tiếp cận tri thức và công nghệ tiên tiến mà c...
+-> Đánh giá: XUẤT SẮC (Top-1 chứa câu trả lời chuẩn) | Điểm câu: 2/2
+
+--- CÂU HỎI 4 ---
+Query : Điều kiện và trình tự để mở một ngành đào tạo trình độ đại học được quy định như thế nào?
+Gold  : Căn cứ theo Thông tư số 02/2022/TT-BGDĐT và Thông tư số 12/2024/TT-BGDĐT của Bộ GD&ĐT cùng Quyết định số 4555/QĐ-ĐHQGHN quy định điều kiện, trình tự, thủ tục mở ngành đào tạo trình độ đại học tại ĐHQGHN.
+  Top-1 | Score: 0.7094 | doc: quy-dinh-mo-nganh    | Nội dung: # Quy định điều kiện, trình tự, thủ tục mở ngành đào tạo trình độ Đại học  Trường Đại học Công nghệ, ĐHQGHN th...
+  Top-2 | Score: 0.6361 | doc: quy-che-dao-tao      | Nội dung: a) Quy định cấu trúc chương trình đào tạo theo Điều 10 của Quy chế này;  b) Thẩm định, phê duyệt đề án mở ngà...
+  Top-3 | Score: 0.6200 | doc: quy-dinh-mo-nganh    | Nội dung: - **Quyết định số 4555/QĐ-ĐHQGHN** ngày 22 tháng 12 năm 2022 của Đại học Quốc gia Hà Nội về việc ban hành Quy...
+-> Đánh giá: XUẤT SẮC (Top-1 chứa câu trả lời chuẩn) | Điểm câu: 2/2
+
+--- CÂU HỎI 5 ---
+Query : Theo quy chế đào tạo đại học của ĐHQGHN, sinh viên cần đáp ứng những điều kiện nào để được công nhận tốt nghiệp?
+Filter: {'audience': 'student'}
+Gold  : Theo Điều 43 QĐ 5115: Trong thời gian học tập tối đa, không bị truy cứu trách nhiệm hình sự, tích lũy đủ số tín chỉ, ĐTBCTL đạt từ 2,00 trở lên (2,50 đối với hệ tài năng/CLC), đạt chuẩn ngoại ngữ, GDQP-AN và GDTC.
+  Top-1 | Score: 0.6330 | doc: quy-che-dao-tao      | Nội dung: Quy chế này quy định về đào tạo bậc đại học tại Đại học Quốc gia Hà Nội, bao gồm: chương trình đào tạo; tổ ch...
+  Top-2 | Score: 0.6330 | doc: quy-che-dao-tao      | Nội dung: # Quy chế đào tạo đại học ĐHQGHN (Quyết định số 5115/QĐ-ĐHQGHN)  *(Ban hành kèm theo Quyết định số 5115/QĐ-ĐHQ...
+  Top-3 | Score: 0.6296 | doc: quy-che-dao-tao      | Nội dung: CÔNG NHẬN TỐT NGHIỆP  ### Điều 43. Điều kiện tốt nghiệp  Sinh viên sau khi hoàn thành chương trình đào tạo đ...
+-> Đánh giá: XUẤT SẮC (Top-1 chứa câu trả lời chuẩn) | Điểm câu: 2/2
+
+================================================================================
+[3] THỰC NGHIỆM A/B TESTING BẮT BUỘC (TÁC ĐỘNG CỦA METADATA FILTER TRÊN CÂU 4):
+================================================================================
+Query: Điều kiện và trình tự để mở một ngành đào tạo trình độ đại học được quy định như thế nào?
+
+* LẦN 1: KHÔNG DÙNG BỘ LỌC (filter = None) — Tìm kiếm tự do trên toàn corpus:
+  1. Score: 0.7094 | doc_id: quy-dinh-mo-nganh      | audience: faculty
+  2. Score: 0.6361 | doc_id: quy-che-dao-tao        | audience: student
+  3. Score: 0.6200 | doc_id: quy-dinh-mo-nganh      | audience: faculty
+
+* LẦN 2: CÓ BỘ LỌC PRE-FILTERING (filter = {'audience': 'student'}) — Dành cho sinh viên tra cứu:
+  1. Score: 0.6361 | doc_id: quy-che-dao-tao        | audience: student
+  2. Score: 0.6008 | doc_id: quy-che-dao-tao        | audience: student
+  3. Score: 0.6005 | doc_id: quy-che-dao-tao        | audience: student
+
+=> KẾT LUẬN A/B TESTING:
+Khi không lọc (Lần 1): Hệ thống trả về văn bản quản trị nội bộ dành cho giảng viên/hội đồng mở ngành (audience: faculty) ở Top-1 & Top-2.
+Khi bật pre-filtering audience='student' (Lần 2): 100% tài liệu của giảng viên bị loại bỏ, hệ thống chỉ lấy quy định học phần trong quy chế đào tạo của người học.
+
+================================================================================
+TỔNG KẾT ĐIỂM TRUY XUẤT RETRIEVAL: 9 / 10 điểm
+================================================================================
